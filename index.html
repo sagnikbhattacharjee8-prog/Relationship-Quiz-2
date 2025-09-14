@@ -37,9 +37,11 @@
       margin: 10px auto;
       border-radius: 5px;
       border: none;
+      display: block;
     }
     textarea {
       height: 120px;
+      resize: vertical;
     }
     .sponsors {
       position: fixed;
@@ -48,38 +50,47 @@
       width: 100%;
       text-align: center;
       background: #121212;
-      padding: 5px 0;
+      padding: 8px 0;
+      z-index: 999;
     }
     .sponsors img {
       width: 60px;
-      margin: 0 5px;
+      margin: 0 8px;
+      vertical-align: middle;
+      border-radius: 6px;
     }
     #progressContainer {
       width: 80%;
-      margin: 10px auto;
+      margin: 10px auto 20px auto;
       background: #333;
       border-radius: 5px;
-      height: 20px;
+      height: 18px;
+      overflow: hidden;
     }
     #progressBar {
       height: 100%;
       width: 0%;
       background: #ff4081;
       border-radius: 5px;
+      transition: width 0.25s ease;
     }
+    #validationMsg { color: #ff8080; min-height: 20px; }
+    #wordCountMsg { color: #bbb; font-size: 13px; margin-top: 6px; }
+    img.question-img { max-width: 320px; border-radius: 8px; margin-top: 12px; }
+    #uidExample { max-width:200px; margin-top:10px; border:2px solid #fff; border-radius:10px; }
   </style>
 </head>
 <body>
 
   <!-- Landing Page -->
   <div id="landing" class="page active">
-    <h1>Welcome to the Anonymous Relationship Quiz 2.0</h1>
-    <p>Complete the Quiz Challenge, answer all questions, follow the rules, and Win Rs.50 worth of Swiggy Money Gift Card and a Shopping Voucher frrom our Partner Brand.</p>
+    <h1>Welcome to Anonymous Relationship Quiz 2.0</h1>
+    <p>Take this challenge and answer all the questions Honestly and Win a Swiggy Money Gift Card Worth Rs. 50 and a Shopping Voucher From our partner brand.</p>
     <button onclick="nextPage('rules')">Start</button>
     <div class="sponsors">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
+      <img src="Sponsor 1 WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
+      <img src="Sponsor 2 WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
+      <img src="Sponsor 3 WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
     </div>
   </div>
 
@@ -87,18 +98,18 @@
   <div id="rules" class="page">
     <h2>Rules & Details :</h2>
     <ul style="text-align:left; display:inline-block;">
-      <li>Your name/identity is not collected.<li>
-      <li>You're anonymous — answer freely.<li>
-      <li>Do not answer with just "Yes" or "No".<li>
-      <li>Too-short answers may be rejected for rewards.<li>
-      <li>Please be honest — it helps the series continue.<li>
-      <li>Organizers & sponsors decide final reward distribution.</li>
+      <li>Your name/identity is not collected.</li>
+</li>You're anonymous — answer freely.</li>
+</li>Do not answer with just "Yes" or "No".</li>
+</li>Too-short answers may be rejected for rewards.</li>
+</li>Please be honest — it helps the series continue.</li>
+</li>Organizers & sponsors decide final reward distribution.</li>
     </ul>
     <button onclick="nextPage('disclaimer')">Continue</button>
     <div class="sponsors">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
+      <img src="Sponsor 1 WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
+      <img src="Sponsor 2 WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
+      <img src="Sponsor 3 WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
     </div>
   </div>
 
@@ -108,26 +119,26 @@
     <p>This material contains extreme sexual and explicit content strictly intended for mature audiences of legal age (18+ or as applicable in your jurisdiction). It is created and provided solely for entertainment purposes, and the creators, publishers, and distributors shall not be held responsible for any consequences, interpretations, misuse, or impact arising from its viewing. By proceeding, you confirm that you are of legal age, willing to engage with such content, and understand that any resemblance to real persons or events is purely coincidental. If you are underage, easily offended, or uncomfortable with sexually explicit material, you are advised to refrain from continuing further.</p>
     <button onclick="nextPage('ageGender')">I Agree</button>
     <div class="sponsors">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
+      <img src="Sponsor 1 WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
+      <img src="Sponsor 2 WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
+      <img src="Sponsor 3 WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
     </div>
   </div>
 
   <!-- Age & Gender -->
   <div id="ageGender" class="page">
     <h2>Tell us about yourself</h2>
-    <input type="number" id="age" placeholder="Enter your age"><br>
+    <input type="number" id="age" placeholder="Enter your age">
     <select id="gender">
       <option value="">Select Gender</option>
       <option value="Male">Male</option>
       <option value="Female">Female</option>
-    </select><br>
+    </select>
     <button onclick="startQuiz()">Continue</button>
     <div class="sponsors">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
+      <img src="Sponsor 1 WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
+      <img src="Sponsor 2 WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
+      <img src="Sponsor 3 WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
     </div>
   </div>
 
@@ -136,12 +147,13 @@
     <div id="progressContainer"><div id="progressBar"></div></div>
     <h2 id="questionText"></h2>
     <div id="answerBox"></div>
-    <p id="validationMsg" style="color:red;"></p>
+    <div id="wordCountMsg"></div>
+    <p id="validationMsg"></p>
     <button id="nextBtn" onclick="submitAnswer()">Next</button>
     <div class="sponsors">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
+      <img src="Sponsor 1 WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
+      <img src="Sponsor 2 WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
+      <img src="Sponsor 3 WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
     </div>
   </div>
 
@@ -150,17 +162,18 @@
     <h2>Your Unique ID</h2>
     <p id="uidDisplay"></p>
     <p>📸 Take a Screenshot and Send it to the sender to receive your Rewards!</p>
-    <img src="uid-example.png" alt="UID Example" style="max-width:200px; margin-top:10px; border:2px solid #fff; border-radius:10px;">
+    <img id="uidExample" src="uid-example.png" alt="UID Example">
+    <br>
     <button onclick="nextPage('credits')">Continue</button>
     <div class="sponsors">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
+      <img src="Sponsor 1 WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
+      <img src="Sponsor 2 WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
+      <img src="Sponsor 3 WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
     </div>
   </div>
 
   <!-- Credits -->
-  <div id="credits" class="page">
+  <div id="credits :" class="page">
     <h2>Credits</h2>
     <p>Created By : Aman, Tushar Tg, Sagnik, Aashik K & Sammy
 Creative : Aashik K, Sagnik & Subham
@@ -171,55 +184,55 @@ Business Co-ordinator : Raj & Nitesh Yadav</p>
       <button type="submit">Finish & Submit</button>
     </form>
     <div class="sponsors">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
+      <img src="Sponsor 1 WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
+      <img src="Sponsor 2 WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
+      <img src="Sponsor 3 WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
     </div>
   </div>
 
 <script>
   const questions = [
-    "Are you a Virgin?", // Q1
-    "What is your Body Count?",
-    "Which body part do you observe at first when you see someone? (Except Face)",
-    "Have you ever cheated on any of your partner?",
-    "Name All your Ex(s).",
-    "Mention Every Breakup, why it didn't worked out?",
-    "Ever Had Breakup S*x?",
-    "Do you Smoke or Consume Alcohol? If yes how often?",
-    "Any Notable Incidents of being Drunk?",
-    "Ever had S*x While being intoxicated?",
-    "Name and mention relation of the person(s) you trust the most and can share anything from your life without thinking twice.",
-    "Ever had S*x during periods?",
-    "Have PCOS/PCOD?",
-    "What is your period cycle? (Dates)",
-    "Have pain in your lower belly during periods?",
-    "Usual Go to remedies for period pain?",
-    "[IMAGE QUESTION]",
-    "Ever had S*x in public place?",
-    "How long can you ride a sybian? (If not tried write as per idea)",
-    "Ever had cum inside without protection? (How many times)",
-    "Ever had cum on face / mouth? (How many times)",
-    "What turns you on the most?",
-    "Mention the insecurity when you make out with ur partner?",
-    "What if you had a crush on someone after being married?",
-    "Describe your last time having S*x Experience.",
-    "Describe your first time having S*x Experience.",
-    "Describe your worst time having S*x Experience.",
-    "Name Person(s) who you believe can risk their life to save you if needed.",
-    "Ever Tried '69' Or 'Lap Ride'? If yes describe Experience.",
-    "If, Your Partner/ Crush is kidnapped by a Female Friend of Yours, Now you got to know she also likes him seriously, Now a Challenge Comes up you have to go on a s*x fight with your friend, the reward is if you win you get him back, rule is the one c*ms first looses also gets humiliated. Now what would you do, if you choose to participate what will be the possible result according to you ?",
-    "What would you do, if a situation arises for "Non Consensual Foreplay, being forced or forcing someone ?",
-    "If Ch*king, slapping, tieing up or leaving marks and of these happens with you, What will be your reaction towards it ?",
-    "Imagine being tied up and teased until you're shaking - Would you able to hold out or beg to stop ?",
-    "Imagine being tied up, completely vulnerable, while someone teases your clit and inner thighs but stops every time you get close. How long could you last before begging to c*m ?",
-    "What if you were blindfolded and made to feel lips, fingers, and toys everywhere, but never allowed c*m? Would you survive the torment, or melt instantly ?",
-    "Picture being restrained, teased with ice, warm breath, and gentle scratching — then denied each climax. How long would your body take before shaking uncontrollably ?",
-    "Imagine being made to edge repeatedly, until every nerve in your p*ssy is alive — but release is forbidden. Could you hold out for 30 minutes… an hour… longer ?",
-    "What if your partner whispered dirty fantasies directly into your ear while teasing you relentlessly, promising release only when they decide? Would you be able to obey, or break instantly ?",
-    "Suppose your body is being touched, licked, and teased in ways you’ve only fantasized about — but each time you almost c*m, they stop. How much longer could you endure this delicious torture ?",
-    "Imagine wearing vibrating toys or clamps while restrained, every sensation amplified, and being denied the moment you get close. Can you do it for one whole day ?",
-    "Imagine a situation arises, You have choices, Either Risk your partner/crushs life and save one of your parent or risk your parents life and save your partner/crushes life or risk the life of a person you mentioned you believe that they can risk their life for you and save both or take the hands on assistance on fields from that person and you and that person try to save all of you. Choose one thing and explain Why ?."
+`1. Are you a Virgin ?`,
+`2. What is your Body Count ?`,
+`3. Which body part do you observe at first when you see someone ? (Except Face)`,
+`4. Have you ever cheated on any of your partner ?`,
+`5. Name All your Ex(s).`,
+`6. Mention Every Breakup, why it didn't worked out ?`,
+`7. Ever Had Breakup S*x ?`,
+`8. Do you Smoke or Consume Alcohol ? If yes how often ?`,
+`9. Any Notable Incidents of being Drunk ?`,
+`10. Ever had S*x While being intoxicated ?`,
+`11. Name and mention relation of the person(s) you trust the most and can share anything from your life without thinking twice.`,
+`12. Ever had S*x during periods ?`,
+`13. Have PCOS/PCOD ?`,
+`14. What is your period cycle ? (Dates)`,
+`15. Have pain in your lower belly during periods ?`,
+`16. Usual Go to remedies for period pain ?`,
+`17. [Just a image will be displayed]`,
+`18. Ever had S*x in public place ?`,
+`19. How long can you ride an sybian ? (If not tried write as per idea)`,
+`20. Ever had cum inside without protection ? (How many times)`,
+`21. Ever had cum on face / mouth ? (How many times)`,
+`22. What turns you on the most ?`,
+`23. Mention the insecurity when you make out with ur partner ?`,
+`24. What if you had a crush on someone after being married ?`,
+`25. Describe your last time having S*x Experience.`,
+`26. Describe your first time having S*x Experience.`,
+`27. Describe your worst time having S*x Experience.`,
+`28. Name Person(s) who you believe can risk their life to save you if needed.`,
+`29. Ever Tried " 69 " Or " Lap Ride " if yes describe Experience.`,
+`30. If, Your Partner/ Crush is kidnapped by a Female Friend of Yours, Now you got to she also likes him seriously, Now a Challenge Comes up you have to go on a s*x fight with your friend, the reward is if you win you get him back, rule is the one c*ms first looses also gets humiliated. Now what would you do, if you choose to participate what will be the possible result according to you ?`,
+`31. What would you do, if a situation arises for "Non Consensual Foreplay, being forced or forcing someone " ?`,
+`32. If Ch*king, slapping, tieing up or leaving marks and of these happens with you, What will be your reaction towards it ?`,
+`33. Imagine being tied up and teased until you're shaking - Would you able to hold out or beg to stop ?`,
+`34. Imagine being tied up, completely vulnerable, while someone teases your clit and inner thighs but stops every time you get close. How long could you last before begging to cum?`,
+`35. What if you were blindfolded and made to feel lips, fingers, and toys everywhere, but never allowed release? Would you survive the torment, or melt instantly?`,
+`36. Picture being restrained, teased with ice, warm breath, and gentle scratching — then denied each climax. How long would your body take before shaking uncontrollably?`,
+`37. Imagine being made to edge repeatedly, until every nerve in your p*ssy is alive — but release is forbidden. Could you hold out for 30 minutes… an hour… longer?`,
+`38. What if your partner whispered dirty fantasies directly into your ear while teasing you relentlessly, promising release only when they decide? Would you be able to obey, or break instantly?`,
+`39. Suppose your body is being touched, licked, and teased in ways you’ve only fantasized about — but each time you almost cum, they stop. How much longer could you endure this delicious torture?`,
+`40. Imagine wearing vibrating toys or clamps while restrained, every sensation amplified, and being denied the moment you get close. Can you do it for one whole day ?`,
+`41. Imagine a situation arises, You have choices, Either Risk your partner/crushs life and save one of your parent or risk your parents life and save your partner/crushes life or risk the life of a person you mentioned you believe that they can risk their life for you and save both or take the hands on assistance on fields from that person and you and that person try to save all of you. Choose one thing and explain Why ?`
   ];
 
   let currentQuestion = 0;
@@ -232,6 +245,17 @@ Business Co-ordinator : Raj & Nitesh Yadav</p>
   }
 
   function startQuiz() {
+    // optional: validate age/gender before starting
+    const ageEl = document.getElementById('age');
+    const genderEl = document.getElementById('gender');
+    const age = ageEl ? ageEl.value.trim() : '';
+    const gender = genderEl ? genderEl.value : '';
+    if (!age || !gender) {
+      alert('Please enter your age and select gender to continue.');
+      return;
+    }
+    answers['Age'] = age;
+    answers['Gender'] = gender;
     currentQuestion = 0;
     showQuestion();
     nextPage('quiz');
@@ -239,6 +263,7 @@ Business Co-ordinator : Raj & Nitesh Yadav</p>
 
   function showQuestion() {
     document.getElementById("validationMsg").innerText = "";
+    document.getElementById("wordCountMsg").innerText = "";
     const qText = document.getElementById("questionText");
     const aBox = document.getElementById("answerBox");
     aBox.innerHTML = "";
@@ -254,25 +279,33 @@ Business Co-ordinator : Raj & Nitesh Yadav</p>
     let progressPercent = ((currentQuestion) / questions.length) * 100;
     document.getElementById("progressBar").style.width = progressPercent + "%";
 
-    qText.innerText = "Q" + (currentQuestion + 1) + ": " + questions[currentQuestion];
+    // Show exact question (word for word)
+    qText.innerText = questions[currentQuestion];
 
     if (currentQuestion === 0) {
+      // Yes / No buttons
       aBox.innerHTML = `
-        <button onclick="branchAnswer('Yes')">Yes</button>
-        <button onclick="branchAnswer('No')">No</button>
+        <button id="yesBtn" onclick="branchAnswer('Yes')">Yes</button>
+        <button id="noBtn" onclick="branchAnswer('No')">No</button>
       `;
     } else if (currentQuestion === 16) {
-      aBox.innerHTML = `<img src="8ee38458-5b77-4097-975d-a18c9bef9ec7.__CR0,0,3031,1875_PT0_SX970_V1___.jpeg" alt="Image Question" style="max-width:500px;"><br>
+      // Q17 - show your GitHub image (only this edit made)
+      aBox.innerHTML = `
+        <img src="8ee38458-5b77-4097-975d-a18c9bef9ec7.__CR0,0,3031,1875_PT0_SX970_V1___.jpeg" 
+             alt="Image Question" class="question-img"><br>
         <button onclick="submitImageAnswer('Liked')">Liked</button>
-        <button onclick="submitImageAnswer('Disliked')">Disliked</button>`;
+        <button onclick="submitImageAnswer('Disliked')">Disliked</button>
+      `;
     } else {
-      aBox.innerHTML = `<textarea id="answerInput" placeholder="Write your answer here..."></textarea>`;
+      // regular textarea for answers
+      aBox.innerHTML = `<textarea id="answerInput" placeholder="Write your answer here..." oninput="checkWordCount()"></textarea>`;
     }
   }
 
   function branchAnswer(ans) {
     answers[questions[currentQuestion]] = ans;
     if (ans === "Yes") {
+      // original behaviour: if Yes on Q1, go to UID page
       document.getElementById("uidDisplay").innerText = uid;
       document.getElementById("formData").value = JSON.stringify(answers);
       nextPage("uidPage");
@@ -289,13 +322,19 @@ Business Co-ordinator : Raj & Nitesh Yadav</p>
   }
 
   function submitAnswer() {
+    // Do nothing if we're on Q1 (handled by buttons) or Q17 (image handled by its buttons)
     if (currentQuestion === 0 || currentQuestion === 16) return;
 
-    let input = document.getElementById("answerInput").value.trim();
-    let wordCount = input.split(/\s+/).filter(w => w.length > 0).length;
+    const textarea = document.getElementById("answerInput");
+    if (!textarea) return;
 
+    const input = textarea.value.trim();
+    // robust word count
+    const wordCount = input.length === 0 ? 0 : input.split(/\s+/).filter(w => w.length > 0).length;
+
+    // Q25-Q27 require 50 words (indexes 24-26)
     if ((currentQuestion >= 24 && currentQuestion <= 26 && wordCount < 50) ||
-        (wordCount < 10)) {
+        (currentQuestion < 24 && wordCount < 10)) {
       document.getElementById("validationMsg").innerText = 
         currentQuestion >= 24 && currentQuestion <= 26 ? 
         "Answer too short. Minimum 50 words required." : 
@@ -307,6 +346,20 @@ Business Co-ordinator : Raj & Nitesh Yadav</p>
     currentQuestion++;
     showQuestion();
   }
+
+  function checkWordCount() {
+    const textarea = document.getElementById("answerInput");
+    if (!textarea) return;
+    const input = textarea.value.trim();
+    const words = input.length === 0 ? 0 : input.split(/\s+/).filter(w => w.length > 0).length;
+    const minWords = (currentQuestion >= 24 && currentQuestion <= 26) ? 50 : 10;
+    document.getElementById("wordCountMsg").innerText = `Words: ${words} / Minimum required: ${minWords}`;
+    // clear validationMsg while typing
+    document.getElementById("validationMsg").innerText = "";
+  }
+
+  // Initialize — landing page is active already
+  // (nextPage, startQuiz, showQuestion will be called by UI events)
 </script>
 </body>
 </html>
