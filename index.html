@@ -1,197 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Anonymous Relationship Quiz 2.0</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #121212;
-      color: #f0f0f0;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-    }
-    .page {
-      display: none;
-      padding: 20px;
-    }
-    .active {
-      display: block;
-    }
-    button {
-      padding: 10px 20px;
-      margin: 15px;
-      background: #ff4081;
-      border: none;
-      color: white;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #e73370;
-    }
-    input, select, textarea {
-      padding: 10px;
-      width: 70%;
-      margin: 10px auto;
-      border-radius: 5px;
-      border: none;
-      display: block;
-    }
-    textarea {
-      height: 120px;
-      resize: vertical;
-    }
-    .sponsors {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      text-align: center;
-      background: #121212;
-      padding: 8px 0;
-      z-index: 999;
-    }
-    .sponsors img {
-      width: 100px;
-      margin: 0 8px;
-      vertical-align: middle;
-      border-radius: 6px;
-    }
-    #progressContainer {
-      width: 80%;
-      margin: 10px auto 20px auto;
-      background: #333;
-      border-radius: 5px;
-      height: 18px;
-      overflow: hidden;
-    }
-    #progressBar {
-      height: 100%;
-      width: 0%;
-      background: #ff4081;
-      border-radius: 5px;
-      transition: width 0.25s ease;
-    }
-    #validationMsg { color: #ff8080; min-height: 20px; }
-    #wordCountMsg { color: #bbb; font-size: 13px; margin-top: 6px; }
-    img.question-img { max-width: 320px; border-radius: 8px; margin-top: 12px; }
-    #uidExample { max-width:200px; margin-top:10px; border:2px solid #fff; border-radius:10px; }
+    :root{--bg:#121212;--card:#1e1e1e;--accent:#ff4081;--muted:#bbb}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:#f0f0f0}
+    .page{display:none;padding:22px;min-height:80vh;box-sizing:border-box}
+    .active{display:block}
+    header h1{margin:8px 0 6px;font-size:22px}
+    p{margin:6px 0 12px;color:var(--muted)}
+    button{padding:10px 18px;border-radius:8px;border:none;background:var(--accent);color:#fff;cursor:pointer;margin:8px}
+    button.secondary{background:#444}
+    input,select,textarea{display:block;width:78%;max-width:760px;margin:8px auto;padding:10px;border-radius:6px;border:none;box-sizing:border-box}
+    textarea{height:140px;resize:vertical}
+    .sponsors{position:fixed;left:0;bottom:0;width:100%;background:var(--bg);padding:8px 0;text-align:center;z-index:999}
+    .sponsors img{height:56px;margin:0 8px;border-radius:6px;vertical-align:middle}
+    #progressContainer{width:86%;max-width:900px;margin:8px auto;background:#333;border-radius:8px;height:18px;overflow:hidden}
+    #progressBar{height:100%;width:0;background:var(--accent);transition:width .25s}
+    .topInfo{width:86%;max-width:900px;margin:8px auto;text-align:left;color:var(--muted)}
+    #questionNumber{font-size:13px;color:var(--muted);margin-bottom:6px}
+    #validationMsg{color:#ffb3b3;min-height:20px}
+    #wordCountMsg{color:var(--muted);font-size:13px;margin-top:6px}
+    .question-img{max-width:420px;border-radius:8px;margin-top:12px;border:2px solid rgba(255,255,255,0.06)}
+    .hidden{display:none}
+    .center{text-align:center}
+    form#quizForm{margin:0;padding:0}
+    .footerSmall{color:var(--muted);font-size:13px;margin-top:10px}
   </style>
 </head>
 <body>
 
-  <!-- Landing Page -->
+  <!-- Landing -->
   <div id="landing" class="page active">
-    <h1>Welcome to Anonymous Relationship Quiz 2.0</h1>
-    <p>Take this challenge and answer all the questions Honestly and Win a Swiggy Money Gift Card Worth Rs. 50 and a Shopping Voucher From our partner brand.</p>
-    <button onclick="nextPage('rules')">Start</button>
-    <div class="sponsors">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
+    <header class="center">
+      <h1>Anonymous Relationship Quiz 2.0</h1>
+      <p>Dare to reveal your untold truths.</p>
+      <button onclick="nextPage('rules')">Start</button>
+    </header>
+    <div class="sponsors" aria-hidden="true">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor 1">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor 2">
+      <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor 3">
     </div>
   </div>
 
   <!-- Rules -->
   <div id="rules" class="page">
-    <h2>Rules & Details :</h2>
-    <ul style="text-align:left; display:inline-block;">
-      <li>Your name/identity is not collected.</li>
-      </li>You're anonymous — answer freely.</li>
-      </li>Do not answer with just "Yes" or "No".</li>
-      </li>Too-short answers may be rejected for rewards.</li>
-      </li>Please be honest — it helps the series continue.</li>
-      </li>Organizers & sponsors decide final reward distribution.</li>
+    <div class="topInfo">
+      <div id="questionNumber"></div>
+    </div>
+    <h2>Rules</h2>
+    <ul style="text-align:left;display:inline-block;color:var(--muted)">
+      <li>Be honest with your answers.</li>
+      <li>Minimum 10 words per answer (50 for Q25–Q27).</li>
+      <li>All responses remain anonymous.</li>
     </ul>
-    <button onclick="nextPage('disclaimer')">Continue</button>
-    <div class="sponsors">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
+    <div class="center">
+      <button onclick="nextPage('disclaimer')">Continue</button>
     </div>
   </div>
 
   <!-- Disclaimer -->
   <div id="disclaimer" class="page">
     <h2>Disclaimer</h2>
-    <p>This material contains extreme sexual and explicit content strictly intended for mature audiences of legal age (18+ or as applicable in your jurisdiction). It is created and provided solely for entertainment purposes, and the creators, publishers, and distributors shall not be held responsible for any consequences, interpretations, misuse, or impact arising from its viewing. By proceeding, you confirm that you are of legal age, willing to engage with such content, and understand that any resemblance to real persons or events is purely coincidental. If you are underage, easily offended, or uncomfortable with sexually explicit material, you are advised to refrain from continuing further.</p>
-    <button onclick="nextPage('ageGender')">I Agree</button>
-    <div class="sponsors">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
+    <p>This quiz contains mature themes. Proceed only if comfortable.</p>
+    <div class="center">
+      <button onclick="nextPage('ageGender')">I Agree</button>
     </div>
   </div>
 
   <!-- Age & Gender -->
   <div id="ageGender" class="page">
     <h2>Tell us about yourself</h2>
-    <input type="number" id="age" placeholder="Enter your age">
+    <input id="age" type="number" placeholder="Enter your age" />
     <select id="gender">
       <option value="">Select Gender</option>
       <option value="Male">Male</option>
       <option value="Female">Female</option>
+      <option value="Other">Other</option>
     </select>
-    <button onclick="startQuiz()">Continue</button>
-    <div class="sponsors">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
+    <div class="center">
+      <button onclick="startQuiz()">Continue</button>
     </div>
   </div>
 
   <!-- Quiz -->
   <div id="quiz" class="page">
     <div id="progressContainer"><div id="progressBar"></div></div>
+    <div class="topInfo">
+      <div id="questionNumber"></div>
+    </div>
     <h2 id="questionText"></h2>
     <div id="answerBox"></div>
     <div id="wordCountMsg"></div>
     <p id="validationMsg"></p>
-    <button id="nextBtn" onclick="submitAnswer()">Next</button>
-    <div class="sponsors">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
+    <div class="center">
+      <button id="nextBtn" onclick="submitAnswer()">Next</button>
     </div>
   </div>
 
-  <!-- UID -->
+  <!-- UID Page -->
   <div id="uidPage" class="page">
     <h2>Your Unique ID</h2>
-    <p id="uidDisplay"></p>
-    <p>📸 Take a Screenshot and Send it to the sender to receive your Rewards!</p>
-    <img id="uidExample" src="uid-example.png" alt="UID Example">
-    <br>
-    <button onclick="nextPage('credits')">Continue</button>
-    <div class="sponsors">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
+    <p id="uidDisplay" style="font-weight:700;letter-spacing:1px;"></p>
+    <p style="color:#ffeb3b;font-weight:600;">Take a Screenshot and Send it to the sender to receive your Rewards</p>
+    <img id="uidExample" src="8ee38458-5b77-4097-975d-a18c9bef9ec7.__CR0,0,3031,1875_PT0_SX970_V1___.jpeg" alt="UID Example" class="question-img">
+    <div class="center" style="margin-top:14px">
+      <button onclick="nextPage('credits')">Continue</button>
     </div>
   </div>
 
-  <!-- Credits -->
-  <div id="credits :" class="page">
+  <!-- Credits (final submit) -->
+  <div id="credits" class="page">
     <h2>Credits</h2>
-    <p>Created By : Aman, Tushar Tg, Sagnik, Aashik K & Sammy
-Creative : Aashik K, Sagnik & Subham
-Special Thanks : Indrajit & Shuvasri
-Business Co-ordinator : Raj & Nitesh Yadav</p>
+    <p>Anonymous Relationship Quiz 2.0 – Powered by our Sponsors</p>
+
     <form id="quizForm" action="https://formsubmit.co/sagnikbhattacharjee8@gmail.com" method="POST">
-      <input type="hidden" name="data" id="formData">
-      <button type="submit">Finish & Submit</button>
+      <input type="hidden" name="data" id="formData" />
+      <div class="center">
+        <button type="submit">Finish & Submit</button>
+      </div>
     </form>
-    <div class="sponsors">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor1">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor2">
-      <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor3">
-    </div>
+
+    <div class="footerSmall center">Responses sent to the configured email.</div>
+  </div>
+
+  <div class="sponsors" aria-hidden="true">
+    <img src="WhatsApp Image 2025-09-13 at 10.49.05 PM.jpeg" alt="Sponsor 1">
+    <img src="WhatsApp Image 2025-09-13 at 10.49.04 PM.jpeg" alt="Sponsor 2">
+    <img src="WhatsApp Image 2025-09-13 at 10.49.06 PM.jpeg" alt="Sponsor 3">
   </div>
 
 <script>
-  const questions = [
+/* ========= exact questions (word-for-word) ========= */
+const questions = [
 `1. Are you a Virgin ?`,
 `2. What is your Body Count ?`,
 `3. Which body part do you observe at first when you see someone ? (Except Face)`,
@@ -233,156 +177,174 @@ Business Co-ordinator : Raj & Nitesh Yadav</p>
 `39. Suppose your body is being touched, licked, and teased in ways you’ve only fantasized about — but each time you almost cum, they stop. How much longer could you endure this delicious torture?`,
 `40. Imagine wearing vibrating toys or clamps while restrained, every sensation amplified, and being denied the moment you get close. Can you do it for one whole day ?`,
 `41. Imagine a situation arises, You have choices, Either Risk your partner/crushs life and save one of your parent or risk your parents life and save your partner/crushes life or risk the life of a person you mentioned you believe that they can risk their life for you and save both or take the hands on assistance on fields from that person and you and that person try to save all of you. Choose one thing and explain Why ?`
-  ];
+];
 
-  let currentQuestion = 0;
-  let answers = {};
-  let uid = "UID-" + Math.floor(100000 + Math.random() * 900000);
+let currentQuestion = 0;
+let answers = {};
+let uid = "UID-" + Math.floor(100000 + Math.random() * 900000);
 
-  function nextPage(id) {
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-  }
-
-  function startQuiz() {
-    // optional: validate age/gender before starting
-    const ageEl = document.getElementById('age');
-    const genderEl = document.getElementById('gender');
-    const age = ageEl ? ageEl.value.trim() : '';
-    const gender = genderEl ? genderEl.value : '';
-    if (!age || !gender) {
-      alert('Please enter your age and select gender to continue.');
-      return;
-    }
-    answers['Age'] = age;
-    answers['Gender'] = gender;
-    currentQuestion = 0;
-    showQuestion();
-    nextPage('quiz');
-  }
-
-  function showQuestion() {
-    document.getElementById("validationMsg").innerText = "";
-    document.getElementById("wordCountMsg").innerText = "";
-    const qText = document.getElementById("questionText");
-    const aBox = document.getElementById("answerBox");
-    aBox.innerHTML = "";
-
-    if (currentQuestion >= questions.length) {
-      document.getElementById("uidDisplay").innerText = uid;
-      document.getElementById("formData").value = JSON.stringify(answers);
-      nextPage("uidPage");
-      return;
-    }
-function nextQuestion() {
-    const answerInput = document.getElementById("answer-input");
-    const validationMsg = document.getElementById("validation-msg");
-
-    // validate minimum 10 words except for Yes/No buttons or UID
-    if (currentQuestion !== 0 && currentQuestion !== 16) {
-        if (answerInput.value.trim().split(/\s+/).length < 10) {
-            validationMsg.innerText = "Answer too short. Minimum 10 words required.";
-            return;
-        }
-    }
-
-    answers.push(answerInput.value.trim());
-    currentQuestion++;
-
-    if (currentQuestion < questions.length) {
-        showQuestion();
-    } else {
-        // end of questions → show Submit page
-        document.getElementById("quiz-page").classList.add("hidden");
-        document.getElementById("submit-page").classList.remove("hidden");
-    }
+/* ---------- page helpers ---------- */
+function nextPage(pageId){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
 }
 
-    // Progress bar update
-    let progressPercent = ((currentQuestion) / questions.length) * 100;
-    document.getElementById("progressBar").style.width = progressPercent + "%";
+/* ---------- navigation: start → rules → disclaimer → ageGender → quiz ---------- */
+function startQuiz(){
+  const age = document.getElementById('age').value.trim();
+  const gender = document.getElementById('gender').value;
+  if(!age || !gender){ alert('Please enter your age and select gender to continue.'); return; }
+  answers['Age'] = age;
+  answers['Gender'] = gender;
+  currentQuestion = 0;
+  showQuestion();
+  nextPage('quiz');
+}
 
-    // Show exact question (word for word)
-    qText.innerText = questions[currentQuestion];
+/* ---------- show question ---------- */
+function showQuestion(){
+  document.getElementById('validationMsg').innerText = '';
+  document.getElementById('wordCountMsg').innerText = '';
+  const qText = document.getElementById('questionText');
+  const aBox = document.getElementById('answerBox');
+  aBox.innerHTML = '';
 
-    if (currentQuestion === 0) {
-      // Yes / No buttons
-      aBox.innerHTML = `
-        <button id="yesBtn" onclick="branchAnswer('Yes')">Yes</button>
-        <button id="noBtn" onclick="branchAnswer('No')">No</button>
-      `;
-    } else if (currentQuestion === 16) {
-      // Q17 - show your GitHub image (only this edit made)
-      aBox.innerHTML = `
-        <img src="8ee38458-5b77-4097-975d-a18c9bef9ec7.__CR0,0,3031,1875_PT0_SX970_V1___.jpeg" 
-             alt="Image Question" class="question-img"><br>
-        <button onclick="submitImageAnswer('Liked')">Liked</button>
-        <button onclick="submitImageAnswer('Disliked')">Disliked</button>
-      `;
-    } else {
-      // regular textarea for answers
-      aBox.innerHTML = `<textarea id="answerInput" placeholder="Write your answer here..." oninput="checkWordCount()"></textarea>`;
-    }
+  if(currentQuestion >= questions.length){
+    // finished all questions → show UID page
+    document.getElementById('uidDisplay').innerText = uid;
+    document.getElementById('formData').value = JSON.stringify(answers);
+    nextPage('uidPage');
+    return;
   }
 
-  function branchAnswer(ans) {
-    answers[questions[currentQuestion]] = ans;
-    if (ans === "Yes") {
-      // original behaviour: if Yes on Q1, go to UID page
-      document.getElementById("uidDisplay").innerText = uid;
-      document.getElementById("formData").value = JSON.stringify(answers);
-      nextPage("uidPage");
-    } else {
-      currentQuestion++;
-      showQuestion();
-    }
+  // progress
+  const pct = Math.round(((currentQuestion) / questions.length) * 100);
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('questionNumber').innerText = `Question ${currentQuestion+1} / ${questions.length}`;
+
+  // show exact question
+  qText.innerText = questions[currentQuestion];
+
+  // Q1 yes/no
+  if(currentQuestion === 0){
+    aBox.innerHTML = `<div style="margin-top:12px"><button onclick="branchAnswer('Yes')">Yes</button><button onclick="branchAnswer('No')" style="margin-left:8px">No</button></div>`;
+    document.getElementById('nextBtn').style.display = 'none';
+    return;
   }
 
-  function submitImageAnswer(ans) {
-    answers[questions[currentQuestion]] = ans;
+  // Q17 image-only (but still need a button to continue)
+  if(currentQuestion === 16){
+    aBox.innerHTML = `
+      <div class="center">
+        <img src="8ee38458-5b77-4097-975d-a18c9bef9ec7.__CR0,0,3031,1875_PT0_SX970_V1___.jpeg" alt="Question 17 Image" class="question-img"><br>
+        <div style="margin-top:10px">
+          <button onclick="submitImageAnswer('Liked')">Liked</button>
+          <button onclick="submitImageAnswer('Disliked')" style="margin-left:8px">Disliked</button>
+        </div>
+      </div>
+    `;
+    document.getElementById('nextBtn').style.display = 'none';
+    return;
+  }
+
+  // regular textarea for other questions
+  aBox.innerHTML = `<textarea id="answerInput" placeholder="Write your answer here..." oninput="checkWordCount()"></textarea>`;
+  document.getElementById('nextBtn').style.display = 'inline-block';
+  // Next button initially disabled until words typed — handled in checkWordCount
+  document.getElementById('nextBtn').disabled = true;
+  document.getElementById('nextBtn').style.opacity = '0.6';
+}
+
+/* ---------- branching for Q1 ---------- */
+function branchAnswer(ans){
+  answers[questions[currentQuestion]] = ans;
+  if(ans === 'Yes'){
+    // original behaviour: immediate UID
+    document.getElementById('uidDisplay').innerText = uid;
+    document.getElementById('formData').value = JSON.stringify(answers);
+    nextPage('uidPage');
+  } else {
     currentQuestion++;
     showQuestion();
   }
+}
 
-  function submitAnswer() {
-    // Do nothing if we're on Q1 (handled by buttons) or Q17 (image handled by its buttons)
-    if (currentQuestion === 0 || currentQuestion === 16) return;
+/* ---------- image question submit ---------- */
+function submitImageAnswer(ans){
+  answers[questions[currentQuestion]] = ans;
+  currentQuestion++;
+  showQuestion();
+}
 
-    const textarea = document.getElementById("answerInput");
-    if (!textarea) return;
+/* ---------- submit answers for textarea questions ---------- */
+function submitAnswer(){
+  // ignore if on Q1 or Q17 (they have their own handlers)
+  if(currentQuestion === 0 || currentQuestion === 16) return;
 
-    const input = textarea.value.trim();
-    // robust word count
-    const wordCount = input.length === 0 ? 0 : input.split(/\s+/).filter(w => w.length > 0).length;
+  const ta = document.getElementById('answerInput');
+  if(!ta) return;
+  const val = ta.value.trim();
+  const wordCount = val === '' ? 0 : val.split(/\s+/).filter(w=>w.length>0).length;
 
-    // Q25-Q27 require 50 words (indexes 24-26)
-    if ((currentQuestion >= 24 && currentQuestion <= 26 && wordCount < 50) ||
-        (currentQuestion < 24 && wordCount < 10)) {
-      document.getElementById("validationMsg").innerText = 
-        currentQuestion >= 24 && currentQuestion <= 26 ? 
-        "Answer too short. Minimum 50 words required." : 
-        "Answer too short. Minimum 10 words required.";
-      return;
-    }
+  const needs50 = (currentQuestion >= 24 && currentQuestion <= 26); // Q25-Q27 indexes 24-26
+  const min = needs50 ? 50 : 10;
 
-    answers[questions[currentQuestion]] = input;
-    currentQuestion++;
-    showQuestion();
+  if(wordCount < min){
+    document.getElementById('validationMsg').innerText = `Answer too short. Minimum ${min} words required.`;
+    return;
   }
 
-  function checkWordCount() {
-    const textarea = document.getElementById("answerInput");
-    if (!textarea) return;
-    const input = textarea.value.trim();
-    const words = input.length === 0 ? 0 : input.split(/\s+/).filter(w => w.length > 0).length;
-    const minWords = (currentQuestion >= 24 && currentQuestion <= 26) ? 50 : 10;
-    document.getElementById("wordCountMsg").innerText = `Words: ${words} / Minimum required: ${minWords}`;
-    // clear validationMsg while typing
-    document.getElementById("validationMsg").innerText = "";
-  }
+  answers[questions[currentQuestion]] = val;
+  currentQuestion++;
+  showQuestion();
+}
 
-  // Initialize — landing page is active already
-  // (nextPage, startQuiz, showQuestion will be called by UI events)
+/* ---------- live word count + enable next ---------- */
+function checkWordCount(){
+  const ta = document.getElementById('answerInput');
+  if(!ta) return;
+  const val = ta.value.trim();
+  const wordCount = val === '' ? 0 : val.split(/\s+/).filter(w=>w.length>0).length;
+  const needs50 = (currentQuestion >= 24 && currentQuestion <= 26);
+  const min = needs50 ? 50 : 10;
+  document.getElementById('wordCountMsg').innerText = `Words: ${wordCount} / Minimum required: ${min}`;
+  const nextBtn = document.getElementById('nextBtn');
+  if(wordCount >= min){
+    nextBtn.disabled = false;
+    nextBtn.style.opacity = '1';
+    document.getElementById('validationMsg').innerText = '';
+  } else {
+    nextBtn.disabled = true;
+    nextBtn.style.opacity = '0.6';
+  }
+}
+
+/* ---------- initialize: landing already active ---------- */
+/* Next page helper for top navigation buttons */
+function nextPageId(id){
+  nextPage(id);
+}
+
+/* ---------- form hidden field will be set on UID page, credits form will submit ---------- */
+document.getElementById('quizForm')?.addEventListener?.('submit', function(e){
+  // allow default formsubmit.co behaviour — formData already set on UID stage
+});
+
+/* expose functions used by inline handlers */
+window.nextPage = nextPage;
+window.startQuiz = startQuiz;
+window.showQuestion = showQuestion;
+window.branchAnswer = branchAnswer;
+window.submitImageAnswer = submitImageAnswer;
+window.submitAnswer = submitAnswer;
+window.checkWordCount = checkWordCount;
+
+/* Ensure landing->rules->disclaimer->ageGender pages navigation */
+document.querySelectorAll('[onclick^="nextPage"]').forEach(btn=>{
+  // keep existing behavior; they call nextPage('pageId')
+});
+
+/* end of script */
 </script>
 </body>
 </html>
