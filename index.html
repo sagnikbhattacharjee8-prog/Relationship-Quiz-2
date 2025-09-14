@@ -274,6 +274,29 @@ Business Co-ordinator : Raj & Nitesh Yadav</p>
       nextPage("uidPage");
       return;
     }
+function nextQuestion() {
+    const answerInput = document.getElementById("answer-input");
+    const validationMsg = document.getElementById("validation-msg");
+
+    // validate minimum 10 words except for Yes/No buttons or UID
+    if (currentQuestion !== 0 && currentQuestion !== 16) {
+        if (answerInput.value.trim().split(/\s+/).length < 10) {
+            validationMsg.innerText = "Answer too short. Minimum 10 words required.";
+            return;
+        }
+    }
+
+    answers.push(answerInput.value.trim());
+    currentQuestion++;
+
+    if (currentQuestion < questions.length) {
+        showQuestion();
+    } else {
+        // end of questions → show Submit page
+        document.getElementById("quiz-page").classList.add("hidden");
+        document.getElementById("submit-page").classList.remove("hidden");
+    }
+}
 
     // Progress bar update
     let progressPercent = ((currentQuestion) / questions.length) * 100;
